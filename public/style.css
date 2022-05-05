@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    width: 100%;
+}
+
+canvas{
+    display: block;
+    border: 1px solid black;
+}
+
+canvas:hover{
+    cursor: url(assets/img/raton_pn_icon.png), pointer;
+
+}
