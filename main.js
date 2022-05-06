@@ -17,9 +17,10 @@ app.use("/", express.static(__dirname + "/public"))
 // config
 
 // start
-server.listen(3000, console.log("Servidor encendido puerto 3000"));
+server.listen(process.env.PORT || 3000, console.log("Servidor encendido puerto 3000")); // Usar esta configuracion para que no de problemas el deploy en heroku
 
 
  app.get("/", async (req, res) => {
      res.sendFile('/index.html')
  })
+ 

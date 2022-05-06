@@ -3,26 +3,14 @@ function init() {
     const canvas = document.getElementById('dibujo');
     const clean = document.getElementById("limpiar");
     const ancho_line = document.getElementById("range")
+    const canvas_color = document.getElementById('color');
     const context = canvas.getContext('2d');
-
-
-    //GUI render
-     document.getElementById('ancho').textContent = ancho_line.value;
-
-    //ancho de linea
-    ancho_line.addEventListener("mousemove", (e) => {
-        document.getElementById('ancho').textContent = e.target.value
-    })
-
-    // function ancho(ancho){
-    //     contexto.lineWidth = ancho.value;
-    //     document.getElementById('ancho').innerHTML = ancho.value;
-    // }
-
+    
     //data config
     let canvas_config = {
         limpiar: false,
-        ancho_line: ancho_line
+        ancho_line: ancho_line,
+        color: canvas_color.value
     }
 
 
@@ -40,6 +28,20 @@ function init() {
     canvas.height = height;
 
     const sockets = io();
+
+    //GUI render
+    
+    //ancho de linea
+    document.getElementById('ancho').textContent = ancho_line.value;
+
+    ancho_line.addEventListener("mousemove", (e) => {
+        document.getElementById('ancho').textContent = e.target.value
+    })
+
+    //color
+    canvas_color.addEventListener("change", (e) => {
+        canvas_config.color = e.target.value;
+     })
 
     // event listener and function
     canvas.addEventListener('mousedown', (e) => {
@@ -71,9 +73,10 @@ function init() {
     })
 
     sockets.on('dibujando', (data) => {
-        console.log(data.line.ancho_line);
+        //console.log(data.line.ancho_line);
         const data_linea = data.line;
             context.beginPath();
+            context.strokeStyle = data_linea.color
             context.lineWidth = data_linea.ancho_line;
             context.moveTo(data_linea.line[0].x - canvas.offsetLeft, data_linea.line[0].y - canvas.offsetTop);
             context.lineTo(data_linea.line[1].x - canvas.offsetLeft, data_linea.line[1].y - canvas.offsetTop);
@@ -89,7 +92,13 @@ function init() {
   
         
         if(mouse.click && mouse.move && mouse.position_prev) {
-            sockets.emit('dibujando', { line: [mouse.position, mouse.position_prev], ancho_line: ancho_line.value});
+            sockets.emit('dibujando', { 
+
+                line: [mouse.position, mouse.position_prev], 
+                ancho_line: ancho_line.value, 
+                color: canvas_config.color
+
+            });
             mouse.move = false;
         }
 
@@ -97,7 +106,6 @@ function init() {
         setTimeout(mainLoop, 25);
     }
     mainLoop();
-
 
 }
 
