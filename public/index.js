@@ -21,8 +21,8 @@ function init() {
         position_prev: { x: 0, y: 0 }
     };
 
-    const width = 1200;
-    const height = 800;
+    const width = 800;
+    const height = 600;
 
     canvas.width = width;
     canvas.height = height;

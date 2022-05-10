@@ -5,15 +5,49 @@
 
 body, html {
     width: 100%;
-    width: 100%;
+    height: 100%;
+}
+
+nav{
+    background-color: rgba(208, 250, 250, 0.884);
+}
+
+a:hover {
+    opacity: 0.5;
+
+}
+
+#body{
+    padding-top: 30px;
 }
 
 canvas{
-    display: block;
+    /* display: block; */
     border: 1px solid black;
+    border-radius: 15px;
 }
 
 canvas:hover{
     cursor: url(assets/img/raton_pn_icon.png), pointer;
 
+}
+
+ul li{
+    padding-top: 30px;
+}
+
+#canvasConfig{
+    background-color: rgb(208, 250, 250);
+    border: rgba(0, 0, 0, 0.568) solid 1px;
+    border-radius: 15px;
+}
+
+#chat{
+    background-color: rgb(208, 250, 250);
+    border: rgba(0, 0, 0, 0.568) solid 1px;
+    border-radius: 15px;
+}
+
+#exampleFormControlTextarea1{
+    height: 350px;
 }
